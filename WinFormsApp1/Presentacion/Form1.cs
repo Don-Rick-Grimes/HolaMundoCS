@@ -15,6 +15,7 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
+            button1.Visible = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -24,7 +25,8 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OperacionFracciones objetoFracciones = new OperacionFracciones(int.Parse(textBox1.Text), int.Parse(textBox2.Text), int.Parse(textBox3.Text), int.Parse(textBox4.Text));
+            
+            OperacionFracciones objetoFracciones = new OperacionFracciones(decimal.ToInt32(numericUpDown1.Value),decimal.ToInt32(numericUpDown2.Value) , decimal.ToInt32(numericUpDown3.Value), decimal.ToInt32(numericUpDown4.Value));
              switch(comboBox1.Text)
             {
                 case "+":
@@ -44,6 +46,27 @@ namespace WinFormsApp1
             }
 
             label2.Text = objetoFracciones.getResultado1().ToString() + "/" + objetoFracciones.getResultado2().ToString();
+        }
+
+        private void NumericUpDown2_Leave(object sender, EventArgs e)
+        {
+            if(numericUpDown2.Value==0)
+            {
+                numericUpDown2.Value = 1;
+            }
+        }
+
+        private void NumericUpDown4_Leave(object sender, EventArgs e)
+        {
+            if (numericUpDown4.Value == 0)
+            {
+                numericUpDown4.Value = 1;
+            }
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button1.Visible = true;
         }
     }
 }

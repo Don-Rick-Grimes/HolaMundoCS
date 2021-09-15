@@ -6,12 +6,8 @@ namespace WinFormsApp1
 {
     class OperacionFracciones
     {
-        private int num1;
-        private int num2;
-        private int num3;
-        private int num4;
-        private int resultado1;
-        private int resultado2;
+        private int num1,num2,num3,num4,resultado1,resultado2;
+        private int a, b, mcd;
 
         public OperacionFracciones(int _num1,int _num2,int _num3, int _num4)
         {
@@ -74,21 +70,49 @@ namespace WinFormsApp1
         {
             setResultado1(num4*num1+num3*num2);
             setResultado2(num2 * num4);
+            simplificar();
         }
         public void restar()
         {
             setResultado1(num4 * num1 - num3*num2);
             setResultado2(num2 * num4);
+            simplificar();
         }
         public void dividir()
         {
             setResultado1(num1 * num4);
             setResultado2(num2 * num3);
+            simplificar();
         }
         public void multiplicar()
         {
             setResultado1(num1 * num3);
             setResultado2(num2 * num4);
+            simplificar();
+        }
+
+        public void simplificar()
+        {
+            if(resultado1 !=0 && resultado2 != 0) 
+            {
+                a = Math.Max(resultado1, resultado2);
+                b = Math.Min(resultado1, resultado2);
+                do //ciclo para hallar el mcd
+                {
+                    mcd = b;  // Guardamos el divisor en el resultado
+                    b = a % b;      //Guardamos el resto en el divisor
+                    a = mcd;  //El divisor para al dividendo
+                }
+                while
+                (b != 0);
+                setResultado1(resultado1 / mcd);
+                setResultado2(resultado2 / mcd);
+                if (resultado2 < 0) //simplificar signos
+                {
+                    setResultado1(resultado1 * -1);
+                    setResultado2(resultado2 * -1);
+                }
+            }
         }
     }
 }
